@@ -57,7 +57,7 @@ class ProteinClassifier:
         Z = X @ self._w + self._B
         return self.sigmoid(Z)
     
-    def predict(self, X, threshold=0.5):
+    def predict(self, X, threshold=0.3122448979591837):
         y_hat = self.predict_proba(X)
         return (y_hat >= threshold)
         
