@@ -53,12 +53,13 @@ class ProteinClassifier:
         # print(f"Weights: {self._w}")
         return losses
     
-    def predict(self, X):
-        
-        pred = X @ self._w + self._B
-        y_hat = self.sigmoid(pred)
-        
-        return (y_hat >= 0.3)
+    def predict_proba(self, X):
+        Z = X @ self._w + self._B
+        return self.sigmoid(Z)
+    
+    def predict(self, X, threshold=0.5):
+        y_hat = self.predict_proba(X)
+        return (y_hat >= threshold)
         
         
         
