@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 class ProteinClassifier:
     def __init__(self, x_train, y_train, x_test, y_test, x_valid, y_valid):
@@ -28,7 +29,7 @@ class ProteinClassifier:
     
         
         iterations = 10000
-        loss = []
+        losses = []
         
         
         for it in range(iterations):
@@ -43,13 +44,22 @@ class ProteinClassifier:
             db = np.mean(pure_error)
             
             ith_loss = -np.mean(self._y_train * np.log(y_hat) + (1 - self._y_train)*np.log(1 - y_hat))
-            loss.append(ith_loss)
+            losses.append(ith_loss)
             
             self._w = self._w - (self._alpha) * dw
             self._B = self._B - (self._alpha) * db
             
             
+        # print(f"Weights: {self._w}")
+        return losses
+    
+    def predict(self, X):
         
-        print(f"Weights: {self._w}")
+        pred = X @ self._w + self._B
+        y_hat = self.sigmoid(pred)
+        
+        return (y_hat >= 0)
+        
+        
         
         
