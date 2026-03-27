@@ -58,7 +58,7 @@ class ProteinClassifier:
         pred = X @ self._w + self._B
         y_hat = self.sigmoid(pred)
         
-        return (y_hat >= 0)
+        return (y_hat >= 0.3)
         
         
         
